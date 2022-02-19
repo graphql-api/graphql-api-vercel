@@ -1,0 +1,33 @@
+type Domain {
+  name: ID!
+}
+
+extend type Query {
+  domain(input: DomainInput!): Domain
+  listDomains: [Domain!]
+  checkDomainAvailability(input: DomainInput!): Boolean
+  domainPrice(input: DomainInput!): Float!
+}
+
+input DomainInput {
+  domain: String!
+}
+
+extend type Mutation {
+  """
+  https://vercel.com/docs/rest-api#endpoints/domains/purchase-a-domain
+  """
+  buyDomain(input: Domain): Domain
+  """
+  https://vercel.com/docs/rest-api#endpoints/domains/register-or-transfer-in-a-new-domain
+  """
+  registerDomain(input: Domain): Domain
+  """
+  https://vercel.com/docs/rest-api#endpoints/domains/register-or-transfer-in-a-new-domain
+  """
+  transferDomain(input: Domain): Domain
+  """
+  https://vercel.com/docs/rest-api#endpoints/domains/remove-a-domain-by-name
+  """
+  removeDomain(input: Domain): Domain
+}
