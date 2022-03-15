@@ -1,0 +1,34 @@
+{
+  "root": "libs/graphql/vercel",
+  "sourceRoot": "libs/graphql/vercel/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/graphql/vercel/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/graphql/vercel"],
+      "options": {
+        "jestConfig": "libs/graphql/vercel/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/graphql/vercel",
+        "tsConfig": "libs/graphql/vercel/tsconfig.lib.json",
+        "packageJson": "libs/graphql/vercel/package.json",
+        "main": "libs/graphql/vercel/src/index.ts",
+        "assets": ["libs/graphql/vercel/*.md"]
+      }
+    }
+  },
+  "tags": []
+}
