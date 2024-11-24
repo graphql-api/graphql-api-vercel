@@ -1,0 +1,71 @@
+# Vercel API GraphQL Schema
+
+type Query {
+    getProjects: [Project!]!
+    getProject(id: ID!): Project
+    getDeployments(projectId: ID!): [Deployment!]!
+    getDeployment(id: ID!): Deployment
+    getFunctions(projectId: ID!): [Function!]!
+    getDomains: [Domain!]!
+    getEnvironmentVariables(projectId: ID!): [EnvironmentVariable!]!
+    getTeams: [Team!]!
+}
+
+type Mutation {
+    createProject(name: String!, framework: String): Project!
+    deleteProject(id: ID!): Boolean!
+    createDeployment(projectId: ID!, url: String!): Deployment!
+    deleteDeployment(id: ID!): Boolean!
+    createFunction(projectId: ID!, name: String!, runtime: String!): Function!
+    deleteFunction(id: ID!): Boolean!
+    createDomain(name: String!, projectId: ID!): Domain!
+    deleteDomain(id: ID!): Boolean!
+    addEnvironmentVariable(projectId: ID!, key: String!, value: String!): EnvironmentVariable!
+    deleteEnvironmentVariable(projectId: ID!, key: String!): Boolean!
+}
+
+type Project {
+    id: ID!
+    name: String!
+    framework: String
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Deployment {
+    id: ID!
+    projectId: ID!
+    url: String!
+    createdAt: String!
+    state: DeploymentState!
+}
+
+enum DeploymentState {
+    QUEUED
+    BUILDING
+    READY
+    ERROR
+}
+
+type Function {
+    id: ID!
+    name: String!
+    projectId: ID!
+    runtime: String
+}
+
+type Domain {
+    id: ID!
+    name: String!
+    projectId: ID!
+}
+
+type EnvironmentVariable {
+    key: String!
+    value: String!
+}
+
+type Team {
+    id: ID!
+    name: String!
+}
